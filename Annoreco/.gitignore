@@ -12,7 +12,6 @@
 
 # 忽略 .idea 和 .mvn 文件夹
 /.idea/
-/.mvn/
 
 # Package Files #
 *.jar
