@@ -6,16 +6,20 @@ import com.example.Annoreco.entity.Annorecuser;
 import com.example.Annoreco.mapper.AnnorecuserMapper;
 import com.example.Annoreco.service.AnnorecuserService;
 import com.example.Annoreco.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 /**
  * <p>
@@ -28,10 +32,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnnorecuserServiceImpl extends ServiceImpl<AnnorecuserMapper, Annorecuser> implements AnnorecuserService, CustomUserDetailsService {
 
+    @Autowired
+    private AnnorecuserMapper annorecuserMapper;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 实现自己的逻辑
-        return null;
+        Annorecuser annorecuser = annorecuserMapper.selectOne(new QueryWrapper<Annorecuser>().eq("name", username));
+        if (annorecuser == null) {
+            throw new UsernameNotFoundException("用户不存在");
+        }
+        return new User(annorecuser.getName(), annorecuser.getPassword(), Collections.emptyList());
     }
 
     private final UserDetailsService userDetailsService;
