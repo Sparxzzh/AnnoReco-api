@@ -1,2 +1,3 @@
+com\example\Annoreco\config\SecurityConfig.class
 com\example\Annoreco\AnnorecoApplication.class
 com\example\Annoreco\ServletInitializer.class

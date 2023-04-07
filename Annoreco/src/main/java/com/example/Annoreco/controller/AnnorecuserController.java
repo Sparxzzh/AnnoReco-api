@@ -23,8 +23,8 @@ public class AnnorecuserController {
     private AnnorecuserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<Annorecuser> login(@RequestParam String username, @RequestParam String password) {
-        Annorecuser user = userService.login(username, password);
+    public ResponseEntity<Annorecuser> login(@RequestParam String name, @RequestParam String password) {
+        Annorecuser user = userService.login(name, password);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

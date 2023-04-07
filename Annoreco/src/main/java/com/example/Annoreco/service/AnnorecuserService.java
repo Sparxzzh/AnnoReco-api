@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-03-28
  */
 public interface AnnorecuserService extends IService<Annorecuser> {
-    Annorecuser login(String username, String password);
+    Annorecuser login(String name, String password);
 
     Annorecuser register(Annorecuser user);
 }

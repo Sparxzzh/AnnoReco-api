@@ -57,11 +57,11 @@ public class AnnorecuserServiceImpl extends ServiceImpl<AnnorecuserMapper, Annor
     }
 
     @Override
-    public Annorecuser login(String username, String password) {
+    public Annorecuser login(String name, String password) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(name, password));
             QueryWrapper<Annorecuser> wrapper = new QueryWrapper<>();
-            wrapper.eq("username", username);
+            wrapper.eq("name", name);
             return this.getOne(wrapper);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("用户名或密码不正确");
